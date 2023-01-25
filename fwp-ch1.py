@@ -118,6 +118,13 @@ class Vector:
         return Vector(self.x * scalar, self.y * scalar)
 
 
+v = Vector(3, 4)
+abs(v)
+print(v * 3)
+# Vector(9, 12)
+print(abs(v * 3))
+# 15.0
+
 """
 String representation
 
