@@ -279,7 +279,80 @@ Building lists of lists
 """
 
 board = [['_']* 3 for i in range(3)]
-print(board)
+# print(board)
 
 board[1][2] = 'X'
-print(board)
+# print(board)
+
+"""sorting lists"""
+
+fruits = ['grape', 'raspberry', 'apple', 'banana']
+# print(sorted(fruits))
+# print(fruits)
+# print(sorted(fruits, reverse=True))
+# print(sorted(fruits, key=len))
+# print(sorted(fruits, key=len, reverse=True))
+fruits.sort()
+# print(fruits)
+
+
+"""
+Bisect module
+
+offers two main functions
+
+bisect and insort
+
+eg. bisect(haystack, needle) does a binary search for needle in haystack
+"""
+
+import bisect
+import sys
+
+HAYSTACK = [1, 4, 5, 6, 8, 12, 15, 20, 21, 23, 23, 26, 29, 30]
+NEEDLES = [0, 1, 2, 5, 8, 10, 22, 23, 29, 30, 31]
+
+ROW_FMT = '{0:2d} @ {1:2d}     {2}{0:<2d}'
+
+def demo(bisect_fn):
+    for needle in reversed(NEEDLES):
+        position = bisect_fn(HAYSTACK, needle)
+        offset = position * ' |'
+      # print(ROW_FMT.format(needle, position, offset))
+
+if __name__ == '__main__':
+    if sys.argv[-1] == 'left':
+        bisect_fn = bisect.bisect_left
+    else:
+        bisect_fn = bisect.bisect
+
+    # print('DEMO:', bisect_fn.__name__)
+    # print('haystack →', ' '.join('%2d' % n for n in HAYSTACK))
+    demo(bisect_fn)
+
+
+
+# skipping bisect → arrays
+
+"""
+Arrays
+array.array is more efficient than a list: it supports all mutable 
+sequence operations (incl. .pop, .insert and .extend)
+"""
+
+# creating, saving and loading a large array of floats
+from array import array
+from random import random
+floats = array('d', (random() for i in range(10**7)))
+# create an array of double-presicion floats from any iterable obj
+floats[-1] # inspect the last number in the array
+fp = open('floats.bin', 'wb')
+floats.tofile(fp) # save the array to a binary file
+fp.close()
+floats2 = array('d') # create an empty array of doubles
+fp = open('floats.bin', 'rb')
+floats2.fromfile(fp, 10**7)
+fp.close()
+floats2[-1]
+floats2 = floats
+
