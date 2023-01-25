@@ -266,10 +266,20 @@ for item in line_items:
 Assigning to slices"""
 
 l = list(range(10))
-print(l)
+# print(l)
 l[2:5] = [20, 30]
-print(l)
+# print(l)
 del l[5:7]
-print(l)
+# print(l)
 l[3::2] = [11, 22]
-print(l)
+# print(l)
+
+"""
+Building lists of lists
+"""
+
+board = [['_']* 3 for i in range(3)]
+print(board)
+
+board[1][2] = 'X'
+print(board)
